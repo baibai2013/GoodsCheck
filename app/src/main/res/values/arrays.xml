@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="city">
+        <item>大仓</item>
+        <item>北京</item>
+        <item>天津</item>
+        <item>陕西</item>
+        <item>云南</item>
+    </string-array>
+
+    <string-array name="store">
+        <item>仓库1</item>
+        <item>仓库2</item>
+        <item>仓库3</item>
+        <item>仓库4</item>
+        <item>仓库5</item>
+    </string-array>
+
+</resources>
