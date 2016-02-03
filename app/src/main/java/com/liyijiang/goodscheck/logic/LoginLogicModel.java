@@ -6,4 +6,10 @@ package com.liyijiang.goodscheck.logic;
 public class LoginLogicModel {
 
 
+
+
+
+
+
+
 }

@@ -14,6 +14,8 @@ import android.view.WindowManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 
+import com.liyijiang.goodscheck.logic.LoginLogicModel;
+
 import java.util.List;
 
 /**
@@ -26,17 +28,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     private static final int REQUEST_READ_CONTACTS = 0;
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-//    private UserLoginTask mAuthTask = null;
+
+    LoginLogicModel loginLogicModel;
+
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -50,6 +44,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_login);
+
+        loginLogicModel = new LoginLogicModel();
         // Set up the login form.
 //        mEmailView = (AutoCompleteTextView) findViewById(goodscheck.liyijaing.com.goodscheck.R.id.email);
 //        populateAutoComplete();
