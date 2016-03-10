@@ -1,6 +1,8 @@
 package com.liyijiang.goodscheck.service;
 
 
+import android.util.JsonReader;
+
 import com.alibaba.fastjson.JSON;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.http.RequestParams;
@@ -10,12 +12,16 @@ import com.liyijiang.goodscheck.bean.LoginBean;
 import com.liyijiang.goodscheck.bean.RequestBean;
 import com.liyijiang.goodscheck.utils.Debug;
 
+import org.apache.http.entity.StringEntity;
+
+import java.io.UnsupportedEncodingException;
+
 /**
  * Created by lili on 16/2/3.
  */
 public class BackofficeService {
 
-    private static String SERVICE_URL = "http://182.50.112.20:8101/backoffice/pandian/checkInterface.php";
+    private static String SERVICE_URL = "http://182.50.112.20:8101/backoffice/pandian/checkInterface.php?";
 
     //下载登录信息
     public static String ACTION_DOWNLOADSTAFF = "downloadStaff";
@@ -36,8 +42,6 @@ public class BackofficeService {
     public static String ACTION_UPLOADCHECKDATA = "uploadCheckData";
 
 
-
-
     public void init() {
 
     }
@@ -45,12 +49,13 @@ public class BackofficeService {
 
     private String getRequestBeanJsonString(String action, Object data) {
         RequestBean requestBean = new RequestBean();
-        LoginBean loginBean = new LoginBean("leyoucheck","leyou1234");
+        LoginBean loginBean = new LoginBean("leyoucheck", "leyou1234");
         if (loginBean != null) {
             requestBean.setLogin(loginBean);
         }
         requestBean.setAction(action);
         requestBean.setData(data);
+
 
         String jsonString = (String) JSON.toJSONString(requestBean);
         Debug.printlili(jsonString);
@@ -58,23 +63,22 @@ public class BackofficeService {
     }
 
 
-    public void downloadData(String action,Object data,RequestCallBack<String> callBack) {
+    public void downloadData(String action, Object data, RequestCallBack<String> callBack) {
 
         String requestBeanjsonString = getRequestBeanJsonString(action, data);
 
         RequestParams params = new RequestParams();
-        params.addBodyParameter("data", requestBeanjsonString);
-
-        HttpUtils http = new HttpUtils();
-        http.send(HttpRequest.HttpMethod.POST, SERVICE_URL, params, callBack);
-
+        params.addHeader("Content-Type", "application/json");
+        try {
+            params.setBodyEntity(new StringEntity(requestBeanjsonString));
+            HttpUtils http = new HttpUtils();
+            http.send(HttpRequest.HttpMethod.POST, SERVICE_URL, params, callBack);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
 
     }
-
-
-
-
 
 
 }

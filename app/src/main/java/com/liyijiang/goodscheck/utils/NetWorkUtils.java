@@ -139,4 +139,5 @@ public class NetWorkUtils {
 		WifiInfo info = wifi.getConnectionInfo();
 		return info.getMacAddress();
 	}
+
 }
